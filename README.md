@@ -104,3 +104,7 @@ python $S/review_state.py status --state reviews/state.json --require check_numb
 - 작성자의 블로그 글쓰기 체계를 일반화했다: [XsQuare01.github.io](https://github.com/XsQuare01/XsQuare01.github.io)의 `docs/writing-rules.md`, `docs/review-rubric.md`.
 - 기능 글 구성은 Riot, Figma, 토스, Discord 기술 블로그를 분석해 정했다.
 - 문장 연결 규칙은 Gopen·Swan, "The Science of Scientific Writing"(1990)을 따랐다.
+
+## 라이선스
+
+[MIT](LICENSE)

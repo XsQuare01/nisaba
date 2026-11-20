@@ -2,8 +2,19 @@
   "name": "nisaba",
   "version": "0.2.0",
   "description": "수학·공학 해설 글과 기능 개발기를 쓰는 워크플로. 독자 요약서, 주장 근거 표, 숫자 재계산, 독자 역할 검토로 막히는 곳과 틀린 곳을 줄인다",
-  "author": { "name": "XsQuare01", "url": "https://github.com/XsQuare01" },
+  "author": {
+    "name": "XsQuare01",
+    "url": "https://github.com/XsQuare01"
+  },
   "homepage": "https://github.com/XsQuare01/nisaba",
   "repository": "https://github.com/XsQuare01/nisaba",
-  "keywords": ["writing", "technical-writing", "math", "engineering", "korean", "review"]
+  "keywords": [
+    "writing",
+    "technical-writing",
+    "math",
+    "engineering",
+    "korean",
+    "review"
+  ],
+  "license": "MIT"
 }
