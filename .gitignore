@@ -1,0 +1,5 @@
+__pycache__/
+evals/results/*.tmp
+.superpowers/
+# 회사 문서에서 가져온 시험 사례와 그 결과. 로컬에만 둔다
+evals/private/

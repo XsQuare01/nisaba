@@ -1,0 +1,11 @@
+{
+  "name": "nisaba",
+  "owner": { "name": "XsQuare01" },
+  "plugins": [
+    {
+      "name": "nisaba",
+      "source": "./",
+      "description": "수학·공학 해설 글과 기능 개발기를 쓰는 워크플로. 독자 요약서, 주장 근거 표, 숫자 재계산, 독자 역할 검토"
+    }
+  ]
+}
