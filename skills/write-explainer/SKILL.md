@@ -93,6 +93,7 @@ python <스킬>/scripts/review_state.py status --state reviews/state.json --requ
 - 플러그인이 설치돼 있으면 `nisaba:cold-reader`, `nisaba:rubric-reviewer`를 쓴다.
 - 없으면 이 플러그인의 `agents/cold-reader.md`, `agents/rubric-reviewer.md` 본문(frontmatter 아래)을 general-purpose 서브에이전트 프롬프트로 넘기고, 읽을 파일 경로를 덧붙인다.
 - 에이전트는 글을 고치지 않는다. 고치는 일은 작성자가 한다.
+- 에이전트는 `/` 목록에 뜨지 않는다. 사용자가 검토만 따로 돌릴 때는 입구 스킬 `/nisaba:cold-read`, `/nisaba:rubric-review`를 쓴다.
 
 ## 규칙이 있는 저장소에서 쓸 때
 

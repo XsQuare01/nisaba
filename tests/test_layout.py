@@ -66,6 +66,31 @@ class SkillLayoutTest(unittest.TestCase):
             self.assertTrue(fm.get("description"), name)
             self.assertEqual(fm.get("tools"), "Read, Glob, Grep", name)
 
+    def test_each_agent_has_user_invocable_skill(self):
+        # 에이전트는 / 목록에 뜨지 않는다. 사용자가 부를 입구 스킬이 에이전트마다 있어야 한다.
+        pairs = {"cold-read": "cold-reader", "rubric-review": "rubric-reviewer"}
+        for skill, agent in pairs.items():
+            text = read(os.path.join(ROOT, "skills", skill, "SKILL.md"))
+            fm = frontmatter(text)
+            self.assertEqual(fm.get("name"), skill)
+            self.assertTrue(fm.get("description"), skill)
+            self.assertTrue(fm.get("argument-hint"), skill)
+            self.assertIn(f'subagent_type: "nisaba:{agent}"', text, skill)
+            self.assertIn(f"agents/{agent}.md", text, skill)
+            self.assertIn("review_state.py record", text, skill)
+            for rel in re.findall(r"`\.\./write-explainer/([\w/.-]+)`", text):
+                self.assertTrue(os.path.exists(os.path.join(SKILL_DIR, rel)), (skill, rel))
+
+    def test_cold_read_withholds_expected_answers(self):
+        text = read(os.path.join(ROOT, "skills", "cold-read", "SKILL.md"))
+        self.assertIn("기대 답", text)
+        self.assertIn("넘기지 않는다", text)
+
+    def test_write_explainer_points_to_entry_skills(self):
+        text = read(SKILL_MD)
+        self.assertIn("/nisaba:cold-read", text)
+        self.assertIn("/nisaba:rubric-review", text)
+
     def test_manifests_parse(self):
         plugin = json.loads(read(os.path.join(ROOT, ".claude-plugin", "plugin.json")))
         market = json.loads(read(os.path.join(ROOT, ".claude-plugin", "marketplace.json")))

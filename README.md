@@ -20,6 +20,8 @@ Nisaba는 이 네 가지를 절차와 스크립트로 막는다.
 | 종류 | 이름 | 하는 일 |
 | --- | --- | --- |
 | 스킬 | `nisaba:write-explainer` | 8단계 흐름: 스펙 → 초안 → 결정적 검사 → 독자 검토 → 전문가 검토 → 재검증 → 최종 상태 → 게시 |
+| 스킬 | `nisaba:cold-read` | 독자 검토만 따로 돌린다. 독자 요약서에서 기대 답을 빼고 cold-reader 에이전트에게 넘긴다 |
+| 스킬 | `nisaba:rubric-review` | 전문가 검토만 따로 돌린다. 숫자 검사를 먼저 돌리고 rubric-reviewer 에이전트에게 넘긴다 |
 | 에이전트 | `nisaba:cold-reader` | 독자 요약서에 적힌 독자가 되어 글을 처음부터 읽는다. 막힌 곳과 판단 질문의 답을 보고한다 |
 | 에이전트 | `nisaba:rubric-reviewer` | 루브릭(L1–L7, P)과 주장 근거 표로 정확성과 근거를 판정한다 |
 | 스크립트 | `check_numbers.py` | 본문의 숫자를 식이나 명령으로 다시 계산해 대조한다. 등록하지 않은 숫자도 찾는다 |
@@ -30,6 +32,8 @@ Nisaba는 이 네 가지를 절차와 스크립트로 막는다.
 | 참고 문서 | `references/*.md` 7개 | 스펙 틀, 근거 상태, 구성, 비유·질문 장부, 한국어 문장, 루브릭, 숫자 목록 형식 |
 
 에이전트는 글을 읽기만 한다. 글을 고치는 일은 작성자가 한다.
+
+에이전트는 `/` 목록에 뜨지 않는다. 사용자가 부를 때는 입구 스킬 `cold-read`, `rubric-review`를 쓴다.
 
 ## 설치
 
@@ -43,6 +47,15 @@ claude plugin install nisaba@nisaba
 ## 쓰는 법
 
 수학·공학 해설 글이나 기능 개발기를 쓰거나 고쳐 달라고 하면 스킬이 불린다. `/nisaba:write-explainer`로 직접 불러도 된다.
+
+검토만 따로 돌릴 수도 있다.
+
+```text
+/nisaba:cold-read <글 파일이나 글 폴더> [독자 설명]
+/nisaba:rubric-review <글 파일이나 글 폴더> [근거 자료 경로...]
+```
+
+독자 설명을 주지 않으면 글 폴더 `spec.md`의 독자 요약서를 쓴다. 그것도 없으면 누구에게 읽힐지 묻는다.
 
 글마다 폴더 하나를 둔다.
 
@@ -90,7 +103,7 @@ python $S/review_state.py status --state reviews/state.json --require check_numb
 
 ## 검증
 
-- 단위 테스트: `python -m unittest discover -s tests` (63개)
+- 단위 테스트: `python -m unittest discover -s tests` (66개)
 - 에이전트 시험: [`evals/README.md`](evals/README.md). 공개 보류 시험 4개는 블로그 실제 사례다. 회사 문서로 만든 기본 시험은 저장소에 넣지 않았다.
 
 ## 한계
